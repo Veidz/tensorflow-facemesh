@@ -6,9 +6,19 @@ import Webcam from "react-webcam";
 import "./App.css";
 
 function App() {
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+
   return (
-    <div className="App">
-      facemesh
+    <div className="container">
+      <Webcam
+        ref={ webcamRef }
+        className="webcam"
+      />
+      <canvas
+        ref={ canvasRef }
+        className="webcam"
+      />
     </div>
   )
 }
