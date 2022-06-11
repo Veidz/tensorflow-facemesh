@@ -10,17 +10,6 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // Load facemesh
-  const runFacemesh = async () => {
-    const net = await facemesh.load({
-      inputresolution: {
-        width: 640,
-        height: 480,
-      },
-      scale: 0.8
-    });
-  }
-
   // Detect webcam
   const detectWebcam = async (net) => {
     if (
@@ -28,7 +17,22 @@ function App() {
       && webcamRef.current !== null
       && webcamRef.current.video.readState === 4
     ) {
+      // Video properties
+      const video = webcamRef.current.video;
+      const { videoWidth } = video;
+      const { videoHeight } = video;
 
+      // Set video size
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
+      // Set canvas size
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
+
+      // Make detections
+      const face = await net.estimateFaces(video);
+      console.log(face);
     }
   }
 
