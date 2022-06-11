@@ -2642,19 +2642,49 @@ export const TRIANGULATION = [
   255,
 ];
 
-// Draw the triangle points
+// Draw triangle path
+const drawPath = (ctx, points, closePath) => {
+  const region = new Path2D();
+  region.moveTo(points[0][0], points[0][1]);
+
+  for (let index = 1; index < points.length; index += 1) {
+    const point = points[1];
+    region.lineTo(point[0], point[1]);
+  }
+
+  if (closePath) {
+    region.closePath();
+  }
+
+  ctx.strokeStyle = "#ebcdb7";
+  ctx.stroke(region);
+}
+
+// Draw the triangle mesh
 export const drawMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       const keyPoints = prediction.scaledMesh;
 
+      // Draw triangles
+      for (let index = 0; index < TRIANGULATION.length / 3; index += 1) {
+        const points = [
+          TRIANGULATION[index * 3],
+          TRIANGULATION[index * 3 + 1],
+          TRIANGULATION[index * 3 + 2],
+        ].map((index) => keyPoints[index]);
+
+        drawPath(ctx, points, true);
+      }
+
+      // Draw points
       for (let index = 0; index < keyPoints.length; index += 1) {
         const x = keyPoints[index][0];
         const y = keyPoints[index][1];
 
         ctx.beginPath();
         ctx.arc(x, y, 1, 0, 3 * Math.PI);
-        ctx.fillStyle = "aqua";
+        ctx.fillStyle = "orange";
         ctx.fill();
       }
     });
