@@ -2641,3 +2641,22 @@ export const TRIANGULATION = [
   448,
   255,
 ];
+
+// Draw the triangle points
+export const drawMesh = (predictions, ctx) => {
+  if (predictions.length > 0) {
+    predictions.forEach((prediction) => {
+      const keyPoints = prediction.scaledMesh;
+
+      for (let index = 0; i < keyPoints.length; i += 1) {
+        const x = keyPoints[index][0];
+        const y = keyPoints[index][1];
+
+        ctx.beginPath();
+        ctx.arc(x, y, 1, 0, 3 * Math.PI);
+        ctx.fillStyle = "aqua";
+        ctx.fill();
+      }
+    });
+  }
+}
