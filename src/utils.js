@@ -2648,7 +2648,7 @@ export const drawMesh = (predictions, ctx) => {
     predictions.forEach((prediction) => {
       const keyPoints = prediction.scaledMesh;
 
-      for (let index = 0; i < keyPoints.length; i += 1) {
+      for (let index = 0; index < keyPoints.length; index += 1) {
         const x = keyPoints[index][0];
         const y = keyPoints[index][1];
 
