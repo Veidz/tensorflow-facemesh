@@ -15,7 +15,7 @@ function App() {
     if (
       typeof webcamRef.current !== 'undefined'
       && webcamRef.current !== null
-      && webcamRef.current.video.readState === 4
+      && webcamRef.current.video.readyState === 4
     ) {
       // Video properties
       const video = webcamRef.current.video;
