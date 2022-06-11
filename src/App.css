@@ -1,5 +1,9 @@
 .container {
-  text-align: center;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .webcam {
@@ -9,7 +13,6 @@
   left: 0;
   right: 0;
   text-align: center;
-  z-index: 1;
   width: 640px;
   height: 480px;
 }
