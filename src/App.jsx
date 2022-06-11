@@ -36,6 +36,23 @@ function App() {
     }
   }
 
+  // Load facemesh
+  const handleFacemesh = async () => {
+    const net = await facemesh.load({
+      inputResolution: {
+        width: 640,
+        height: 480,
+      },
+      scale: 0.8
+    });
+
+    setInterval(() => {
+      detectWebcam(net);
+    }, 100);
+  }
+
+  handleFacemesh();
+
   return (
     <div className="container">
       <Webcam
